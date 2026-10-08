@@ -1,0 +1,64 @@
+<section class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+  @if (store.ranStats().length === 0) {
+    <div class="p-8 text-center">
+      <p class="text-sm text-gray-500">No running statistics yet.</p>
+    </div>
+  } @else {
+    <div class="max-h-[500px] overflow-auto">
+      <table class="w-full min-w-[900px] text-left text-sm">
+        <thead class="sticky top-0 border-b border-gray-200 bg-gray-50">
+          <tr>
+            <th scope="col" class="px-4 py-3 font-medium text-gray-600">Date</th>
+            <th scope="col" class="px-4 py-3 font-medium text-gray-600">Distance</th>
+            <th scope="col" class="px-4 py-3 font-medium text-gray-600">Duration</th>
+            <th scope="col" class="px-4 py-3 font-medium text-gray-600">Pace</th>
+            <th scope="col" class="px-4 py-3 font-medium text-gray-600">Remarks</th>
+
+            <th scope="col" class="px-4 py-3 text-right font-medium text-gray-600">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-gray-100">
+          @for (stat of store.ranStats(); track stat.id) {
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 text-gray-900">
+                {{ stat.date }}
+              </td>
+
+              <td class="px-4 py-3 text-gray-700">{{ stat.distance }} km</td>
+              <td class="px-4 py-3 text-gray-700">{{ stat.duration }} min</td>
+              <td class="px-4 py-3 text-gray-700">{{ stat.pace }} min/km</td>
+              <td class="max-w-xs px-4 py-3 text-gray-700">
+                @if (stat.remarks) {
+                  {{ stat.remarks }}
+                } @else {
+                  <span class="text-gray-400">—</span>
+                }
+              </td>
+
+              <td class="px-4 py-3">
+                <div class="flex justify-end gap-2">
+                  <button
+                    type="button"
+                    class="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    (click)="editRanStat(stat.id)"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    type="button"
+                    class="rounded-md border border-red-300 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50"
+                    (click)="deleteRanStat(stat.id)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

@@ -1,0 +1,22 @@
+<div class="mx-auto max-w-4xl p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Ran Stats</h1>
+      <p class="mt-1 text-sm text-gray-500">Track your running activities</p>
+    </div>
+
+    <button type="button" class="btn-primary" (click)="openAddRanStat()">Add Run</button>
+  </div>
+</div>
+<app-ran-stat-list
+  (editRequested)="openEditRanStat($event)"
+  (deleteRequested)="deleteRanStat($event)"
+/>
+
+@if (formOpen()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+    <div class="w-full max-w-lg rounded-xl bg-white p-6 shadow-xl">
+      <app-ran-stat-form (closed)="closeForm()" />
+    </div>
+  </div>
+}

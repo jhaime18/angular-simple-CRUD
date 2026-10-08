@@ -1,0 +1,39 @@
+<div class="space-y-5">
+  <div class="flex items-center justify-between">
+    <h2 class="text-xl font-semibold text-gray-900">
+      {{ isEditing() ? 'Edit Run' : 'Add Run' }}
+    </h2>
+    <button
+      type="button"
+      class="rounded-md px-2 py-1 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+      (click)="cancel()"
+      aria-label="Close"
+    >
+      X
+    </button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="saveRanStat()" class="space-y-4">
+    <label class="labek"> Date </label>
+    <input type="date" formControlName="date" class="input" />
+
+    <label class="label"> Distance </label>
+    <input type="number" formControlName="distance" class="input" />
+
+    <label class="label"> Duration </label>
+    <input type="number" formControlName="duration" class="input" />
+
+    <label class="label"> Pace </label>
+    <input type="number" formControlName="pace" class="input" />
+
+    <label class="label"> Remarks </label>
+    <textarea formControlName="remarks" class="input"></textarea>
+
+    <div class="flex justify-between gap-3 pt-2">
+      <button type="button" (click)="cancel()" class="btn-secondary">Cancel</button>
+      <button type="submit" class="btn-primary">
+        {{ isEditing() ? 'Update Run' : 'Add Run' }}
+      </button>
+    </div>
+  </form>
+</div>
